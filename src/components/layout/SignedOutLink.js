@@ -5,7 +5,7 @@ class SignedOutLink extends Component {
     return (
       <ul className="right">
         <li>
-          <NavLink to="/home">Sign Up</NavLink>
+          <NavLink to="/signUp">Sign Up</NavLink>
         </li>
         <li>
           <NavLink to="/signin">Log In</NavLink>
