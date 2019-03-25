@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom';
 class Dashboard extends Component {
   render() {
     const { projects, auth } = this.props;
-    if(!auth.uid) {
-      return <Redirect to='/signin'/>
+    if (!auth.uid) {
+      return <Redirect to="/signin" />;
     }
     return (
       <div>
@@ -18,7 +18,6 @@ class Dashboard extends Component {
               <h1>
                 {item.name}-{item.class}
               </h1>
-              <h2> </h2>
             </div>
           );
         })}

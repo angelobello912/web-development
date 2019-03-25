@@ -18,14 +18,13 @@ export class SignIn extends Component {
   handleSubmit = e => {
     const { dispatchSignIn } = this.props;
     e.preventDefault();
-    dispatchSignIn(this.state)
+    dispatchSignIn(this.state);
   };
-
 
   render() {
     const { auth } = this.props;
-    if(auth.uid) {
-      return <Redirect to='/signin'/>
+    if (auth.uid) {
+      return <Redirect to="/home" />;
     }
     return (
       <div className="container">
@@ -48,17 +47,20 @@ export class SignIn extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     authError: state.auth.authError,
-    auth: state.firebase.auth,
-  }
-} 
+    auth: state.firebase.auth
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    dispatchSignIn: (creds) => dispatch(signIn(creds))
-  }
-}
+    dispatchSignIn: creds => dispatch(signIn(creds))
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);
