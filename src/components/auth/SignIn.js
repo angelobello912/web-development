@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
+import Spinner from '../../base/components/Spinner';
 export class SignIn extends Component {
   state = {
     email: '',
@@ -22,7 +23,10 @@ export class SignIn extends Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const { auth, authError, authIsLoading } = this.props;
+    if (authIsLoading) {
+      return <Spinner isLoading />;
+    }
     if (auth.uid) {
       return <Redirect to="/home" />;
     }
@@ -41,6 +45,7 @@ export class SignIn extends Component {
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Login</button>
           </div>
+          <h5 style={{ color: 'red' }}>{authError}</h5>
         </form>
       </div>
     );
@@ -50,6 +55,7 @@ export class SignIn extends Component {
 const mapStateToProps = state => {
   return {
     authError: state.auth.authError,
+    authIsLoading: state.auth.isLoading,
     auth: state.firebase.auth
   };
 };

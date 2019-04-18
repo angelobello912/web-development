@@ -5,14 +5,19 @@ import { signOut } from '../../store/actions/authActions';
 
 class SignedInLink extends Component {
   render() {
-    const { dispatchSignOut }  = this.props;
+    const { dispatchSignOut } = this.props;
     return (
       <ul className="right">
         <li>
-          <NavLink to="/createProject">New Projects</NavLink>
+          <NavLink to="/createProject">New Contribution</NavLink>
         </li>
         <li>
-          <a href="/" onClick={dispatchSignOut}>Log Out</a>
+          <NavLink to="/contributions">Contributions</NavLink>
+        </li>
+        <li>
+          <a href="/" onClick={dispatchSignOut}>
+            Log Out
+          </a>
         </li>
         <li>
           <NavLink to="/home" className="btn btn-floating pink lighten-1">
@@ -24,10 +29,13 @@ class SignedInLink extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     dispatchSignOut: () => dispatch(signOut())
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(SignedInLink);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignedInLink);

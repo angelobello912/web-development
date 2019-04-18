@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createProject } from '../../store/actions/projectActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Spinner from '../../base/components/Spinner';
 class CreateProject extends Component {
   state = {
     title: '',
@@ -31,8 +32,13 @@ class CreateProject extends Component {
   };
 
   render() {
-    const { auth } = this.props;
-    console.log(this.state);
+    const { auth, profile, isLoading } = this.props;
+    if (isLoading) {
+      return <Spinner isLoading />;
+    }
+    if (profile.isEmpty) {
+      return <Spinner isLoading />;
+    }
     if (!auth.uid) {
       return <Redirect to="/signin" />;
     }
@@ -62,7 +68,9 @@ class CreateProject extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+    isLoading: state.project.isLoading
   };
 };
 

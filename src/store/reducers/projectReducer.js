@@ -1,10 +1,12 @@
 const initState = {
-  projects: [{ name: 'asduahsduih' }]
+  isLoading: false
 };
 const projectReducer = (state = initState, action) => {
   switch (action.type) {
     case 'CREATE_PROJECT':
-      return state;
+      return { ...state, isLoading: true };
+    case 'CREATE_PROJECT_SUCCESS':
+      return { ...state, isLoading: false };
     // eslint-disable-next-line no-fallthrough
     default:
       return state;

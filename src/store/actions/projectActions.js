@@ -1,9 +1,10 @@
 import { storage } from 'firebase';
 
 export const createProject = project => {
-  return (dispatch, getState, { getFirestore }) => {
-    console.log(project, 'project');
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    dispatch({ type: 'CREATE_PROJECT', project });
     const fireStore = getFirestore();
+    const profile = getState().firebase.profile;
     const uploadFile = storage()
       .ref(`images/${project.wordFile.name}`)
       .put(project.wordFile);
@@ -27,10 +28,14 @@ export const createProject = project => {
                 description: project.description,
                 currentUpdatedNumber: 0,
                 createdDateTime: new Date().toString(),
-                updatedDateTime: ''
+                updatedDateTime: '',
+                faculty: profile.faculty,
+                studentId: profile.studentId,
+                userId: profile.userId,
+                studentName: `${profile.lastName} ${profile.firstName}`
               })
               .then(() => {
-                dispatch({ type: 'CREATE_PROJECT', project });
+                dispatch({ type: 'CREATE_PROJECT_SUCCESS', project });
               })
               .catch(err => {
                 alert(err);

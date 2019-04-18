@@ -2,12 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from './../../store/actions/authActions';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
+import { isEmpty, repeat } from 'lodash';
+import Select from 'react-select';
+import Spinner from '../../base/components/Spinner';
+
+const options = [
+  { value: 'design', label: 'Design' },
+  { value: 'it', label: 'IT' },
+  { value: 'marketing', label: 'Marketing' }
+];
 class SignUp extends Component {
+  isLoaded = false;
   state = {
     email: '',
     password: '',
     lastName: '',
     firstName: '',
+    studentId: '',
+    faculty: {}
   };
 
   handeChange = e => {
@@ -17,22 +31,44 @@ class SignUp extends Component {
     });
   };
 
+  handleSelectChange = e => {
+    this.setState({
+      faculty: e
+    });
+  };
+
+  componentDidUpdate() {
+    const { users } = this.props;
+    if (!this.isLoaded && !isEmpty(users)) {
+      this.setState({
+        studentId: `GCS${repeat('0', 5 - users.length.toString().length)}${
+          users.length
+        }`
+      });
+      this.isLoaded = true;
+    }
+  }
+
   handleSubmit = e => {
     const { dispatchSignUp } = this.props;
     e.preventDefault();
-    dispatchSignUp(this.state)
+    dispatchSignUp(this.state);
   };
 
-
   render() {
-    const { auth, authError } = this.props;
-    if(auth.uid) {
-      return <Redirect to='/'/>
+    const { auth, authError, users } = this.props;
+    const { faculty } = this.state;
+
+    if (auth.uid) {
+      return <Redirect to="/" />;
+    }
+    if (isEmpty(users)) {
+      return <Spinner isLoading />;
     }
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Sign In</h5>
+          <h5 className="grey-text text-darken-3">Sign Up</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" onChange={this.handeChange} />
@@ -49,6 +85,26 @@ class SignUp extends Component {
             <label htmlFor="lastName">Last Name</label>
             <input type="text" id="lastName" onChange={this.handeChange} />
           </div>
+          <label>Choose the faculty:</label>
+          <Select
+            styles={{
+              option: (provided, state) => ({
+                ...provided,
+                borderBottom: '1px dotted pink',
+                color: state.isSelected ? 'red' : 'blue',
+                padding: 10
+              }),
+              singleValue: (provided, state) => {
+                const opacity = state.isDisabled ? 0.5 : 1;
+                const transition = 'opacity 300ms';
+
+                return { ...provided, opacity, transition };
+              }
+            }}
+            value={faculty}
+            onChange={this.handleSelectChange}
+            options={options}
+          />
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">SIGN up</button>
           </div>
@@ -59,17 +115,24 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     authError: state.auth.authError,
     auth: state.firebase.auth,
-  }
-} 
+    users: state.firestore.ordered.users
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    dispatchSignUp: (creds) => dispatch(signUp(creds))
-  }
-}
+    dispatchSignUp: creds => dispatch(signUp(creds))
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(['users'])
+)(SignUp);
