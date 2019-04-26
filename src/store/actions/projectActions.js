@@ -32,7 +32,8 @@ export const createProject = project => {
                 faculty: profile.faculty,
                 studentId: profile.studentId,
                 userId: profile.userId,
-                studentName: `${profile.lastName} ${profile.firstName}`
+                studentName: `${profile.lastName} ${profile.firstName}`,
+                status: 'pending'
               })
               .then(() => {
                 dispatch({ type: 'CREATE_PROJECT_SUCCESS', project });
@@ -43,5 +44,29 @@ export const createProject = project => {
           });
       }
     );
+  };
+};
+
+export const approveProject = (project_ids, status) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    project_ids.map(item => {
+      dispatch({ type: 'APPROVE_PROJECT' });
+      return firestore
+        .collection('posts')
+        .doc(item)
+        .set(
+          {
+            status: status
+          },
+          { merge: true }
+        )
+        .then(() => {
+          dispatch({ type: 'APPROVE_PROJECT_SUCCESS' });
+        })
+        .catch(err => {
+          console.log(err, 'errrr');
+        });
+    });
   };
 };

@@ -7,6 +7,9 @@ import CreateProject from './components/projects/CreateProject';
 import SignUp from './components/auth/SignUp';
 import Contributions from './components/contributions/Contributions';
 import ContributionDetail from './components/contributions/ContributionDetail';
+import CreateAccount from './components/auth/CreateAccount';
+import Students from './components/students/Students';
+import CreateCordinators from './components/auth/CreateCordinators';
 class App extends Component {
   render() {
     return (
@@ -23,6 +26,9 @@ class App extends Component {
             />
             <Route path="/contributions" component={Contributions} />
             <Route path="/signUp" component={SignUp} />
+            <Route path="/createAccount" component={CreateAccount} />
+            <Route path="/createCordinators" component={CreateCordinators} />
+            <Route path="/students" component={Students} />
           </Switch>
         </div>
       </BrowserRouter>

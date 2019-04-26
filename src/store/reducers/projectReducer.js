@@ -7,7 +7,10 @@ const projectReducer = (state = initState, action) => {
       return { ...state, isLoading: true };
     case 'CREATE_PROJECT_SUCCESS':
       return { ...state, isLoading: false };
-    // eslint-disable-next-line no-fallthrough
+    case 'APPROVE_PROJECT_SUCCESS':
+      return { ...state, isLoading: false };
+    case 'APPROVE_PROJECT':
+      return { ...state, isLoading: true };
     default:
       return state;
   }

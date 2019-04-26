@@ -25,10 +25,11 @@ class ContributionDetail extends Component {
     if (!auth.uid) {
       return <Redirect to="/signin" />;
     }
+
     return (
       <FileViewer
         fileType={'docx'}
-        filePath={require('../../assets/a.docx')}
+        filePath={require('../../assets/c.docx')}
         errorComponent={<Spinner isLoading />}
         onError={() => console.log('errooorrrrrr')}
       />

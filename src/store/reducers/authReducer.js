@@ -32,7 +32,6 @@ const authReducer = (state = initState, action) => {
         isLoading: false
       };
     case 'LOGIN_SUCCESS':
-      console.log('login success');
       return {
         ...state,
         authError: null,
@@ -41,17 +40,25 @@ const authReducer = (state = initState, action) => {
     case 'SIGNOUT_SUCCESS':
       console.log('signout success');
       return state;
+    case 'SIGNUP':
+      return {
+        ...state,
+        isLoading: true,
+        authError: null
+      };
     case 'SIGNUP_SUCCESS':
       console.log('signup success');
       return {
         ...state,
-        authError: null
+        authError: null,
+        isLoading: false
       };
     case 'SIGNUP_ERROR':
       console.log('signup error');
       return {
         ...state,
-        authError: action.err.message
+        authError: action.err.message,
+        isLoading: false
       };
     default:
       return state;

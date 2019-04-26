@@ -3,6 +3,7 @@ import { createProject } from '../../store/actions/projectActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../../base/components/Spinner';
+
 class CreateProject extends Component {
   state = {
     title: '',
@@ -10,6 +11,7 @@ class CreateProject extends Component {
     wordFile: '',
     url: ''
   };
+
   handleSubmit = e => {
     const { dispatchCreateProject } = this.props;
     e.preventDefault();
