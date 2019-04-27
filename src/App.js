@@ -12,24 +12,23 @@ import Students from './components/students/Students';
 import CreateCordinators from './components/auth/CreateCordinators';
 class App extends Component {
   render() {
-    const baseUrl = '/testschool-30bdb.firebaseapp.com'
     return (
       <BrowserRouter>
         <div className="App">
           <Navbar />
           <Switch>
-            <Route path={baseUrl + '/signin'} component={SignIn} />
-            <Route path={baseUrl + "/home"} component={Dashboard} />
-            <Route path={baseUrl + "/createProject"} component={CreateProject} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/home" component={Dashboard} />
+            <Route path="/createProject" component={CreateProject} />
             <Route
-              path={baseUrl + "/contributionDetail/:id"}
+              path="/contributionDetail/:id"
               component={ContributionDetail}
             />
-            <Route path={baseUrl + "/contributions"} component={Contributions} />
-            <Route path={baseUrl + "/signUp"} component={SignUp} />
-            <Route path={baseUrl + "/createAccount"} component={CreateAccount} />
-            <Route path={baseUrl + "/createCordinators"} component={CreateCordinators} />
-            <Route path={baseUrl + "/students"} component={Students} />
+            <Route path="/contributions" component={Contributions} />
+            <Route path="/signUp" component={SignUp} />
+            <Route path="/createAccount" component={CreateAccount} />
+            <Route path="/createCordinators" component={CreateCordinators} />
+            <Route path="/students" component={Students} />
           </Switch>
         </div>
       </BrowserRouter>
