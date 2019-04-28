@@ -10,6 +10,7 @@ import ContributionDetail from './components/contributions/ContributionDetail';
 import CreateAccount from './components/auth/CreateAccount';
 import Students from './components/students/Students';
 import CreateCordinators from './components/auth/CreateCordinators';
+import CreateStudents from './components/auth/CreateStudents';
 class App extends Component {
   render() {
     return (
@@ -26,6 +27,7 @@ class App extends Component {
             />
             <Route path="/contributions" component={Contributions} />
             <Route path="/signUp" component={SignUp} />
+            <Route path="/createStudents" component={CreateStudents} />
             <Route path="/createAccount" component={CreateAccount} />
             <Route path="/createCordinators" component={CreateCordinators} />
             <Route path="/students" component={Students} />

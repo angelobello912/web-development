@@ -43,6 +43,16 @@ class Students extends Component {
         return item.role !== ROLE.Admin;
       });
     }
+
+    if (get(profile, 'role', '') === ROLE.Cordinator) {
+      usersData = filter(usersData, item => {
+        return (
+          item.role !== ROLE.Admin &&
+          item.role !== ROLE.Marketing_Manager &&
+          item.role !== ROLE.Cordinator
+        );
+      });
+    }
     const studentsMap = map(usersData, item => {
       return {
         email: item.email,

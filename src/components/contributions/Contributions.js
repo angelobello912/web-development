@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { map, isEmpty, filter, get } from 'lodash';
+import { map, isEmpty, filter, get, upperFirst } from 'lodash';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-import { columns, marketingManagerColumns } from './data';
+import {
+  columns,
+  marketingManagerColumns,
+  studentContributionColumns
+} from './data';
 import { NavLink } from 'react-router-dom';
 import { MDBDataTable } from 'mdbreact';
 import Spinner from '../../base/components/Spinner';
@@ -12,7 +16,7 @@ import Checkbox from 'rc-checkbox';
 import { saveAs } from 'file-saver';
 import JSZipUtils from 'jszip-utils';
 import { approveProject } from '../../store/actions/projectActions';
-import { ROLE } from '../constant';
+import { ROLE, STATUS } from '../constant';
 class Contributions extends Component {
   state = {
     checkItem: {},
@@ -38,12 +42,25 @@ class Contributions extends Component {
     });
   };
 
+  getStatusColor = status => {
+    if (status === STATUS.Pending) {
+      return 'orange';
+    }
+    if (status === STATUS.Approved) {
+      return 'green';
+    }
+    if (status === STATUS.Publish) {
+      return 'blue';
+    }
+  };
+
   getPostsDataTable = () => {
     const { posts, profile } = this.props;
     let postsData = posts;
     postsData = posts.filter(item => {
       return item.status === 'pending';
     });
+    let postsMap = [];
     let data = { columns: columns };
     if (get(profile, 'role', '') === ROLE.Marketing_Manager) {
       postsData = posts.filter(item => {
@@ -51,7 +68,24 @@ class Contributions extends Component {
       });
       data.columns = marketingManagerColumns;
     }
-    const postsMap = map(postsData, item => {
+
+    if (get(profile, 'role', '') === ROLE.Student) {
+      postsData = posts.filter(item => {
+        return item.studentId === profile.studentId;
+      });
+      data.columns = studentContributionColumns;
+    }
+
+    if (get(profile, 'role', '') === ROLE.Cordinator) {
+      postsData = posts.filter(item => {
+        return (
+          item.status === 'pending' &&
+          item.faculty === get(profile, 'faculty', '')
+        );
+      });
+    }
+
+    postsMap = map(postsData, item => {
       const data = {
         select: (
           <label>
@@ -76,6 +110,37 @@ class Contributions extends Component {
       }
       return data;
     });
+
+    if (get(profile, 'role', '') === ROLE.Student) {
+      postsMap = map(postsData, item => {
+        const data = {
+          status: (
+            <h5
+              style={{
+                color: this.getStatusColor(item.status)
+              }}
+            >
+              {upperFirst(item.status)}
+            </h5>
+          ),
+          title: item.title,
+          createdDateTime: item.createdDateTime,
+          fileUrl: (
+            <NavLink
+              to={`/contributionDetail/${item.id}`}
+              style={{ color: 'blue' }}
+            >
+              View File
+            </NavLink>
+          )
+        };
+        if (get(profile, 'role', '') === ROLE.Marketing_Manager) {
+          data.faculty = item.faculty;
+        }
+        return data;
+      });
+    }
+
     data.rows = postsMap;
     return data;
   };
@@ -98,7 +163,7 @@ class Contributions extends Component {
         // see FileSaver.js
         saveAs(content, 'example.zip');
       });
-    console.log(allZip, 'asdoiahsd');
+    console.log(allZip);
   };
 
   onAccept = () => {
@@ -106,18 +171,19 @@ class Contributions extends Component {
     if (get(profile, 'role', '') === ROLE.Marketing_Manager) {
       return dispatchApproveProjects(this.state.project_ids, 'publish');
     }
-    return dispatchApproveProjects(this.state.project_ids, 'approved');
+    if (get(profile, 'role', '') === ROLE.Cordinator)
+      return dispatchApproveProjects(this.state.project_ids, 'approved');
   };
 
   render() {
-    const { auth, posts, isLoading } = this.props;
+    const { auth, posts, isLoading, profile } = this.props;
     const { checkItem } = this.state;
 
     if (isLoading) {
       return <Spinner isLoading />;
     }
 
-    if (isEmpty(posts)) {
+    if (isEmpty(posts) || isEmpty(profile)) {
       return <Spinner isLoading />;
     }
     if (!auth.uid) {
@@ -126,13 +192,15 @@ class Contributions extends Component {
     return (
       <div className="container">
         <div>
-          <button
-            className="btn pink lighten-1 right"
-            disabled={isEmpty(checkItem)}
-            onClick={this.onAccept}
-          >
-            Accept
-          </button>
+          {profile.role !== ROLE.Student && (
+            <button
+              className="btn pink lighten-1 right"
+              disabled={isEmpty(checkItem)}
+              onClick={this.onAccept}
+            >
+              Accept
+            </button>
+          )}
           {/* <button
           style={{
             position: 'absolute',

@@ -4,3 +4,9 @@ export const ROLE = {
   Marketing_Manager: 'Marketing Manager',
   Cordinator: 'Cordinator'
 };
+
+export const STATUS = {
+  Pending: 'pending',
+  Approved: 'approved',
+  Publish: 'publish'
+};

@@ -153,3 +153,30 @@ export const studentColumns = [
     width: 100
   }
 ];
+
+export const studentContributionColumns = [
+  {
+    label: 'Status',
+    field: 'status',
+    sort: 'asc',
+    width: 50
+  },
+  {
+    label: 'Title',
+    field: 'title',
+    sort: 'asc',
+    width: 200
+  },
+  {
+    label: 'Create Dated Time',
+    field: 'createdDateTime',
+    sort: 'asc',
+    width: 100
+  },
+  {
+    label: 'File Url',
+    field: 'fileURL',
+    sort: 'asc',
+    width: 30
+  }
+];

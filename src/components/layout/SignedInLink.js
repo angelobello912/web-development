@@ -17,6 +17,55 @@ class SignedInLink extends Component {
       return <Spinner isLoading />;
     }
 
+    if (profile.role === ROLE.Student) {
+      return (
+        <ul className="right">
+          <li>
+            <NavLink to="/createProject">New Contribution</NavLink>
+          </li>
+          <li>
+            <NavLink to="/contributions">Contributions</NavLink>
+          </li>
+          <li>
+            <a href="/" onClick={dispatchSignOut}>
+              Log Out
+            </a>
+          </li>
+          <li>
+            <NavLink className="btn pink lighten-1">
+              {firstName.charAt(0) + lastName.charAt(0)}
+            </NavLink>
+          </li>
+        </ul>
+      );
+    }
+
+    if (profile.role === ROLE.Cordinator) {
+      return (
+        <ul className="right">
+          <li>
+            <NavLink to="/createStudents">Create Students</NavLink>
+          </li>
+          <li>
+            <NavLink to="/students">Manage Students</NavLink>
+          </li>
+          <li>
+            <NavLink to="/contributions">Contributions</NavLink>
+          </li>
+          <li>
+            <a href="/" onClick={dispatchSignOut}>
+              Log Out
+            </a>
+          </li>
+          <li>
+            <NavLink className="btn pink lighten-1">
+              {firstName.charAt(0) + lastName.charAt(0)}
+            </NavLink>
+          </li>
+        </ul>
+      );
+    }
+
     if (profile.role === ROLE.Marketing_Manager) {
       return (
         <ul className="right">
