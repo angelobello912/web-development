@@ -11,6 +11,7 @@ import CreateAccount from './components/auth/CreateAccount';
 import Students from './components/students/Students';
 import CreateCordinators from './components/auth/CreateCordinators';
 import CreateStudents from './components/auth/CreateStudents';
+import Reports from './components/reports/Reports';
 class App extends Component {
   render() {
     return (
@@ -31,6 +32,7 @@ class App extends Component {
             <Route path="/createAccount" component={CreateAccount} />
             <Route path="/createCordinators" component={CreateCordinators} />
             <Route path="/students" component={Students} />
+            <Route path="/reports" component={Reports} />
           </Switch>
         </div>
       </BrowserRouter>

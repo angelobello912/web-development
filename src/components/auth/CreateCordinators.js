@@ -112,7 +112,9 @@ class CreateCordinators extends Component {
             </>
           )}
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">SIGN up</button>
+            <button className="btn pink lighten-1 z-depth-0">
+              Create Account
+            </button>
           </div>
           {authError && <h7 className="red-text text-darken-3">{authError}</h7>}
         </form>

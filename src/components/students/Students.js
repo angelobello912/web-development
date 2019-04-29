@@ -49,7 +49,8 @@ class Students extends Component {
         return (
           item.role !== ROLE.Admin &&
           item.role !== ROLE.Marketing_Manager &&
-          item.role !== ROLE.Cordinator
+          item.role !== ROLE.Cordinator &&
+          item.faculty === get(profile, 'faculty', '')
         );
       });
     }

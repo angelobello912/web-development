@@ -115,13 +115,13 @@ class Contributions extends Component {
       postsMap = map(postsData, item => {
         const data = {
           status: (
-            <h5
+            <h7
               style={{
                 color: this.getStatusColor(item.status)
               }}
             >
               {upperFirst(item.status)}
-            </h5>
+            </h7>
           ),
           title: item.title,
           createdDateTime: item.createdDateTime,
@@ -193,13 +193,22 @@ class Contributions extends Component {
       <div className="container">
         <div>
           {profile.role !== ROLE.Student && (
-            <button
-              className="btn pink lighten-1 right"
-              disabled={isEmpty(checkItem)}
-              onClick={this.onAccept}
-            >
-              Accept
-            </button>
+            <div>
+              <button
+                className="btn pink lighten-1 right"
+                disabled={isEmpty(checkItem)}
+                onClick={this.onAccept}
+              >
+                Accept
+              </button>
+              <button
+                className="btn pink lighten-1 right"
+                disabled={isEmpty(checkItem)}
+                onClick={this.onDownload}
+              >
+                Download
+              </button>
+            </div>
           )}
           {/* <button
           style={{

@@ -102,6 +102,9 @@ class SignedInLink extends Component {
             <NavLink to="/students">Manage Account</NavLink>
           </li>
           <li>
+            <NavLink to="/reports">Reports</NavLink>
+          </li>
+          <li>
             <a href="/" onClick={dispatchSignOut}>
               Log Out
             </a>

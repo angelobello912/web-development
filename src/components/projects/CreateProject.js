@@ -3,13 +3,15 @@ import { createProject } from '../../store/actions/projectActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../../base/components/Spinner';
+import Checkbox from 'rc-checkbox';
 
 class CreateProject extends Component {
   state = {
     title: '',
     description: '',
     wordFile: '',
-    url: ''
+    url: '',
+    agreeTermAndPolicies: false
   };
 
   handleSubmit = e => {
@@ -33,8 +35,15 @@ class CreateProject extends Component {
     });
   };
 
+  onCheckItem = e => {
+    this.setState({
+      agreeTermAndPolicies: e.target.checked
+    });
+  };
+
   render() {
     const { auth, profile, isLoading } = this.props;
+    const { agreeTermAndPolicies } = this.state;
     if (isLoading) {
       return <Spinner isLoading />;
     }
@@ -59,8 +68,29 @@ class CreateProject extends Component {
           <div className="input-field">
             <input type="file" id="url" onChange={this.handleFileUpload} />
           </div>
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              direction: 'row'
+            }}
+          >
+            <label style={{ marginTop: 10 }}>
+              <Checkbox onChange={(e, checked) => this.onCheckItem(e)} />
+            </label>
+            I accept Greenwich University Contribution's{' '}
+            <a href="https://en.wikipedia.org/wiki/Terms_of_service">
+              Terms & Conditions
+            </a>
+          </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Submit</button>
+            <button
+              disabled={!agreeTermAndPolicies}
+              className="btn pink lighten-1 z-depth-0"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
