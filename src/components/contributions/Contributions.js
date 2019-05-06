@@ -111,6 +111,31 @@ class Contributions extends Component {
       return data;
     });
 
+    if (get(profile, 'role', '') === ROLE.Cordinator) {
+      postsMap = map(postsData, item => {
+        const data = {
+          select: (
+            <label>
+              <Checkbox onChange={(e, checked) => this.onCheckItem(item, e)} />
+            </label>
+          ),
+          title: item.title,
+          studentId: item.studentId,
+          studentName: item.studentName,
+          createdDateTime: item.createdDateTime,
+          fileUrl: (
+            <NavLink to={`/viewDetail/${item.id}`} style={{ color: 'blue' }}>
+              View Details
+            </NavLink>
+          )
+        };
+        if (get(profile, 'role', '') === ROLE.Marketing_Manager) {
+          data.faculty = item.faculty;
+        }
+        return data;
+      });
+    }
+
     if (get(profile, 'role', '') === ROLE.Student) {
       postsMap = map(postsData, item => {
         const data = {
@@ -126,11 +151,8 @@ class Contributions extends Component {
           title: item.title,
           createdDateTime: item.createdDateTime,
           fileUrl: (
-            <NavLink
-              to={`/contributionDetail/${item.id}`}
-              style={{ color: 'blue' }}
-            >
-              View File
+            <NavLink to={`/viewDetail/${item.id}`} style={{ color: 'blue' }}>
+              View Details
             </NavLink>
           )
         };

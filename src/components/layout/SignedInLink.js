@@ -22,7 +22,15 @@ class SignedInLink extends Component {
       return (
         <>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            style={{
+              backgroundColor: '#202020',
+              marginTop: -15,
+              zIndex: 10,
+              paddingLeft: 15
+            }}
+          >
             <Nav className="mr-auto">
               <Nav.Link>
                 <NavLink to="/createProject">New Contribution</NavLink>
@@ -52,7 +60,15 @@ class SignedInLink extends Component {
       return (
         <>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            style={{
+              backgroundColor: '#202020',
+              marginTop: -15,
+              zIndex: 10,
+              paddingLeft: 15
+            }}
+          >
             <Nav className="mr-auto">
               <Nav.Link>
                 <NavLink to="/createStudents">Create Students</NavLink>
@@ -85,7 +101,15 @@ class SignedInLink extends Component {
       return (
         <>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            style={{
+              backgroundColor: '#202020',
+              marginTop: -15,
+              zIndex: 10,
+              paddingLeft: 15
+            }}
+          >
             <Nav className="mr-auto">
               <Nav.Link>
                 <NavLink to="/createCordinators">Create Coordinators</NavLink>
@@ -118,7 +142,15 @@ class SignedInLink extends Component {
       return (
         <>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            style={{
+              backgroundColor: '#202020',
+              marginTop: -15,
+              zIndex: 10,
+              paddingLeft: 15
+            }}
+          >
             <Nav className="mr-auto">
               <Nav.Link>
                 <NavLink to="/createAccount">Create Account</NavLink>
@@ -152,7 +184,15 @@ class SignedInLink extends Component {
     return (
       <>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse
+          id="responsive-navbar-nav"
+          style={{
+            backgroundColor: '#202020',
+            marginTop: -15,
+            zIndex: 10,
+            paddingLeft: 15
+          }}
+        >
           <Nav className="mr-auto">
             <Nav.Link>
               <NavLink to="/createProject">New Contribution</NavLink>

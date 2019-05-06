@@ -11,7 +11,7 @@ class NavbarSchool extends Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <div className="container">
-          <Navbar.Brand>
+          <Navbar.Brand style={{ marginTop: -15 }}>
             <NavLink to="/home">Greenwich University</NavLink>
           </Navbar.Brand>
           {auth.uid ? <SignedInLink /> : <SignedOutLink />}

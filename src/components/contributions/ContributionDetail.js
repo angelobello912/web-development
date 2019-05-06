@@ -20,7 +20,6 @@ class ContributionDetail extends Component {
     if (isEmpty(posts)) {
       return <Spinner isLoading />;
     }
-    console.log(this.getPostById().fileURL, 'this.getPostById().fileURL');
 
     if (!auth.uid) {
       return <Redirect to="/signin" />;
@@ -29,7 +28,7 @@ class ContributionDetail extends Component {
     return (
       <FileViewer
         fileType={'docx'}
-        filePath={require('../../assets/c.docx')}
+        filePath={this.getPostById().fileURL}
         errorComponent={<Spinner isLoading />}
         onError={() => console.log('errooorrrrrr')}
       />

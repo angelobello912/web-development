@@ -8,5 +8,6 @@ export const ROLE = {
 export const STATUS = {
   Pending: 'pending',
   Approved: 'approved',
-  Publish: 'publish'
+  Publish: 'publish',
+  Reject: 'reject'
 };

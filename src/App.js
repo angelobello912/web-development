@@ -12,6 +12,8 @@ import Students from './components/students/Students';
 import CreateCordinators from './components/auth/CreateCordinators';
 import CreateStudents from './components/auth/CreateStudents';
 import Reports from './components/reports/Reports';
+import ViewDetail from './components/contributions/ViewDetail';
+import EditProject from './components/projects/EditProject';
 class App extends Component {
   render() {
     return (
@@ -21,10 +23,12 @@ class App extends Component {
           <Route path="/signin" component={SignIn} />
           <Route path="/home" component={Dashboard} />
           <Route path="/createProject" component={CreateProject} />
+          <Route path="/editProject/:id" component={EditProject} />
           <Route
             path="/contributionDetail/:id"
             component={ContributionDetail}
           />
+          <Route path="/viewDetail/:id" component={ViewDetail} />
           <Route path="/contributions" component={Contributions} />
           <Route path="/signUp" component={SignUp} />
           <Route path="/createStudents" component={CreateStudents} />

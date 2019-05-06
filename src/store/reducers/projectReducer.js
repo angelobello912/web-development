@@ -11,6 +11,10 @@ const projectReducer = (state = initState, action) => {
       return { ...state, isLoading: false };
     case 'APPROVE_PROJECT':
       return { ...state, isLoading: true };
+    case 'COMMENT_PROJECT':
+      return { ...state, isLoading: true };
+    case 'COMMENT_PROJECT_SUCCESS':
+      return { ...state, isLoading: false };
     default:
       return state;
   }
