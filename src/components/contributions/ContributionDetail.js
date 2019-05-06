@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { isEmpty, find } from 'lodash';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 import Spinner from '../../base/components/Spinner';
 import FileViewer from 'react-file-viewer';
 class ContributionDetail extends Component {
@@ -16,7 +15,7 @@ class ContributionDetail extends Component {
   };
 
   render() {
-    const { auth, posts } = this.props;
+    const { posts } = this.props;
     if (isEmpty(posts)) {
       return <Spinner isLoading />;
     }

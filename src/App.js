@@ -14,6 +14,8 @@ import CreateStudents from './components/auth/CreateStudents';
 import Reports from './components/reports/Reports';
 import ViewDetail from './components/contributions/ViewDetail';
 import EditProject from './components/projects/EditProject';
+import Reports2 from './components/reports/Reports2';
+import Reports3 from './components/reports/Reports3';
 class App extends Component {
   render() {
     return (
@@ -36,6 +38,8 @@ class App extends Component {
           <Route path="/createCordinators" component={CreateCordinators} />
           <Route path="/students" component={Students} />
           <Route path="/reports" component={Reports} />
+          <Route path="/reports2" component={Reports2} />
+          <Route path="/reports3" component={Reports3} />
         </Switch>
       </BrowserRouter>
     );

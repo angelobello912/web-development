@@ -39,7 +39,6 @@ class ViewDetail extends Component {
   };
 
   getStatusColor = status => {
-    console.log(status, 'status');
     if (status === STATUS.Reject) {
       return 'danger';
     }

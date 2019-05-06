@@ -50,8 +50,12 @@ export const createProject = project => {
 export const approveProject = (project_ids, status) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    console.log(project_ids, 'project_ids');
+    const state = getState();
+    const profile = getState().firebase.profile;
     project_ids.map(item => {
+      const post = find(state.firestore.ordered.posts, data => {
+        return data.id === item;
+      });
       dispatch({ type: 'APPROVE_PROJECT' });
       return firestore
         .collection('posts')
@@ -63,12 +67,41 @@ export const approveProject = (project_ids, status) => {
           { merge: true }
         )
         .then(() => {
+          firestore.collection('notifications').add({
+            isRead: false,
+            postId: item,
+            senderId: profile.userId,
+            senderName: profile.firstName + ' ' + profile.lastName,
+            text: `${status} your contribution`,
+            recieverId: post.userId
+          });
           dispatch({ type: 'APPROVE_PROJECT_SUCCESS' });
         })
         .catch(err => {
           console.log(err, 'errrr');
         });
     });
+  };
+};
+
+export const readNoti = noti_id => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    return firestore
+      .collection('notifications')
+      .doc(noti_id)
+      .set(
+        {
+          isRead: true
+        },
+        { merge: true }
+      )
+      .then(() => {
+        //
+      })
+      .catch(err => {
+        console.log(err, 'errrr');
+      });
   };
 };
 
@@ -80,13 +113,13 @@ export const commentOrReplyProject = (
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const state = getState();
-    console.log(state.firestore.ordered.posts, 'asdajosd');
+    const profile = state.firebase.profile;
     const post = find(state.firestore.ordered.posts, item => {
       return item.id === project_id;
     });
     const comment = get(post, status, []);
     dispatch({ type: 'COMMENT_PROJECT' });
-    return firestore
+    firestore
       .collection('posts')
       .doc(project_id)
       .set(
@@ -97,6 +130,16 @@ export const commentOrReplyProject = (
         { merge: true }
       )
       .then(() => {
+        if (status === 'comment') {
+          firestore.collection('notifications').add({
+            isRead: false,
+            postId: project_id,
+            senderId: profile.userId,
+            senderName: profile.firstName + ' ' + profile.lastName,
+            text: 'comment on your contribution',
+            recieverId: post.userId
+          });
+        }
         dispatch({ type: 'COMMENT_PROJECT_SUCCESS' });
       })
       .catch(err => {
