@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import SignedInLink from './SignedInLink';
 import SignedOutLink from './SignedOutLink';
 import { connect } from 'react-redux';

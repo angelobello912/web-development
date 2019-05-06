@@ -25,10 +25,8 @@ class EditProject extends Component {
 
   componentDidUpdate() {
     const { isFirstLoading } = this.state;
-    const { posts } = this.props;
     const post = this.getPostById();
     if (!isFirstLoading && !isEmpty(post)) {
-      console.log(post, 'post');
       this.setState(
         {
           title: post.title,
