@@ -6,7 +6,7 @@ import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../../base/components/Spinner';
 import { Bar } from 'react-chartjs-2';
-
+import windowSize from 'react-window-size';
 class Reports extends Component {
   state = {
     checkItem: {},
@@ -34,7 +34,6 @@ class Reports extends Component {
       },
       []
     );
-    console.log(contributionsByMonth, 'contributionsByMonth');
     return contributionsByMonth;
   };
 
@@ -88,7 +87,8 @@ class Reports extends Component {
   };
 
   render() {
-    const { auth, posts, isLoading, profile } = this.props;
+    const { auth, posts, isLoading, profile, windowWidth } = this.props;
+    console.log(windowWidth, 'windowWidth');
     if (isLoading) {
       return <Spinner isLoading />;
     }
@@ -106,7 +106,7 @@ class Reports extends Component {
         </h5>
         <Bar
           data={this.getChartData()}
-          height={500}
+          height={windowWidth > 1000 ? 500 : 300}
           options={{
             maintainAspectRatio: false
           }}
@@ -134,4 +134,4 @@ export default compose(
     mapDispatchToProps
   ),
   firestoreConnect(['projects', 'users', 'posts'])
-)(Reports);
+)(windowSize(Reports));

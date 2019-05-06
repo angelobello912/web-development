@@ -5,6 +5,7 @@ import { signOut } from '../../store/actions/authActions';
 import { isEmpty } from 'lodash';
 import Spinner from '../../base/components/Spinner';
 import { ROLE } from '../constant';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 class SignedInLink extends Component {
   render() {
     const {
@@ -19,124 +20,161 @@ class SignedInLink extends Component {
 
     if (profile.role === ROLE.Student) {
       return (
-        <ul className="right">
-          <li>
-            <NavLink to="/createProject">New Contribution</NavLink>
-          </li>
-          <li>
-            <NavLink to="/contributions">Contributions</NavLink>
-          </li>
-          <li>
-            <a href="/" onClick={dispatchSignOut}>
-              Log Out
-            </a>
-          </li>
-          <li>
-            <NavLink className="btn pink lighten-1">
-              {firstName.charAt(0) + lastName.charAt(0)}
-            </NavLink>
-          </li>
-        </ul>
+        <>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link>
+                <NavLink to="/createProject">New Contribution</NavLink>
+              </Nav.Link>
+              <Nav.Link>
+                <NavLink to="/contributions">Contributions</NavLink>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link>
+                <a href="/" onClick={dispatchSignOut}>
+                  Log Out
+                </a>
+              </Nav.Link>
+              <Nav.Link href="/">
+                <NavLink className="btn pink lighten-1">
+                  {firstName.charAt(0) + lastName.charAt(0)}
+                </NavLink>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </>
       );
     }
 
     if (profile.role === ROLE.Cordinator) {
       return (
-        <ul className="right">
-          <li>
-            <NavLink to="/createStudents">Create Students</NavLink>
-          </li>
-          <li>
-            <NavLink to="/students">Manage Students</NavLink>
-          </li>
-          <li>
-            <NavLink to="/contributions">Contributions</NavLink>
-          </li>
-          <li>
-            <a href="/" onClick={dispatchSignOut}>
-              Log Out
-            </a>
-          </li>
-          <li>
-            <NavLink className="btn pink lighten-1">
-              {firstName.charAt(0) + lastName.charAt(0)}
-            </NavLink>
-          </li>
-        </ul>
+        <>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link>
+                <NavLink to="/createStudents">Create Students</NavLink>
+              </Nav.Link>
+              <Nav.Link>
+                <NavLink to="/students">Manage Students</NavLink>
+              </Nav.Link>
+              <Nav.Link>
+                <NavLink to="/contributions">Contributions</NavLink>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link>
+                <a href="/" onClick={dispatchSignOut}>
+                  Log Out
+                </a>
+              </Nav.Link>
+              <Nav.Link href="/">
+                <NavLink className="btn pink lighten-1">
+                  {firstName.charAt(0) + lastName.charAt(0)}
+                </NavLink>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </>
       );
     }
 
     if (profile.role === ROLE.Marketing_Manager) {
       return (
-        <ul className="right">
-          <li>
-            <NavLink to="/createCordinators">Create Coordinators</NavLink>
-          </li>
-          <li>
-            <NavLink to="/students">Manage Account</NavLink>
-          </li>
-          <li>
-            <NavLink to="/contributions">Contributions</NavLink>
-          </li>
-          <li>
-            <a href="/" onClick={dispatchSignOut}>
-              Log Out
-            </a>
-          </li>
-          <li>
-            <NavLink className="btn pink lighten-1">
-              {firstName.charAt(0) + lastName.charAt(0)}
-            </NavLink>
-          </li>
-        </ul>
+        <>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link>
+                <NavLink to="/createCordinators">Create Coordinators</NavLink>
+              </Nav.Link>
+              <Nav.Link>
+                <NavLink to="/students">Manage Account</NavLink>
+              </Nav.Link>
+              <Nav.Link>
+                <NavLink to="/contributions">Contributions</NavLink>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link>
+                <a href="/" onClick={dispatchSignOut}>
+                  Log Out
+                </a>
+              </Nav.Link>
+              <Nav.Link href="/">
+                <NavLink className="btn pink lighten-1">
+                  {firstName.charAt(0) + lastName.charAt(0)}
+                </NavLink>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </>
       );
     }
 
     if (profile.role === ROLE.Admin) {
       return (
-        <ul className="right">
-          <li>
-            <NavLink to="/createAccount">Create Account</NavLink>
-          </li>
-          <li>
-            <NavLink to="/students">Manage Account</NavLink>
-          </li>
-          <li>
-            <NavLink to="/reports">Reports</NavLink>
-          </li>
-          <li>
-            <a href="/" onClick={dispatchSignOut}>
-              Log Out
-            </a>
-          </li>
-          <li>
-            <NavLink className="btn pink lighten-1">
-              {firstName.charAt(0) + lastName.charAt(0)}
-            </NavLink>
-          </li>
-        </ul>
+        <>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link>
+                <NavLink to="/createAccount">Create Account</NavLink>
+              </Nav.Link>
+              <Nav.Link>
+                <NavLink to="/students">Manage Account</NavLink>
+              </Nav.Link>
+              <NavDropdown title="Reports" id="collasible-nav-dropdown">
+                <NavDropdown.Item>
+                  <NavLink to="/reports">Reports</NavLink>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            <Nav>
+              <Nav.Link>
+                <a href="/" onClick={dispatchSignOut}>
+                  Log Out
+                </a>
+              </Nav.Link>
+              <Nav.Link href="/">
+                <NavLink className="btn pink lighten-1">
+                  {firstName.charAt(0) + lastName.charAt(0)}
+                </NavLink>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </>
       );
     }
 
     return (
-      <ul className="right">
-        <li>
-          <NavLink to="/createProject">New Contribution</NavLink>
-        </li>
-        <li>
-          <NavLink to="/contributions">Contributions</NavLink>
-        </li>
-        <li>
-          <a href="/" onClick={dispatchSignOut}>
-            Log Out
-          </a>
-        </li>
-        <li>
-          <NavLink className="btn pink lighten-1">
-            {firstName.charAt(0) + lastName.charAt(0)}
-          </NavLink>
-        </li>
-      </ul>
+      <>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link>
+              <NavLink to="/createProject">New Contribution</NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink to="/contributions">Contributions</NavLink>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link>
+              <a href="/" onClick={dispatchSignOut}>
+                Log Out
+              </a>
+            </Nav.Link>
+            <Nav.Link href="/">
+              <NavLink className="btn pink lighten-1">
+                {firstName.charAt(0) + lastName.charAt(0)}
+              </NavLink>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </>
     );
   }
 }

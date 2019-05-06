@@ -43,7 +43,7 @@ export class SignIn extends Component {
             <input type="password" id="password" onChange={this.handeChange} />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
+            <button className="btn pink lighten-1">Login</button>
           </div>
           <h5 style={{ color: 'red' }}>{authError}</h5>
         </form>

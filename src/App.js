@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
+import NavbarSchool from './components/layout/NavbarSchool';
 import SignIn from './components/auth/SignIn';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProject from './components/projects/CreateProject';
@@ -16,25 +16,23 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
-          <Navbar />
-          <Switch>
-            <Route path="/signin" component={SignIn} />
-            <Route path="/home" component={Dashboard} />
-            <Route path="/createProject" component={CreateProject} />
-            <Route
-              path="/contributionDetail/:id"
-              component={ContributionDetail}
-            />
-            <Route path="/contributions" component={Contributions} />
-            <Route path="/signUp" component={SignUp} />
-            <Route path="/createStudents" component={CreateStudents} />
-            <Route path="/createAccount" component={CreateAccount} />
-            <Route path="/createCordinators" component={CreateCordinators} />
-            <Route path="/students" component={Students} />
-            <Route path="/reports" component={Reports} />
-          </Switch>
-        </div>
+        <NavbarSchool />
+        <Switch>
+          <Route path="/signin" component={SignIn} />
+          <Route path="/home" component={Dashboard} />
+          <Route path="/createProject" component={CreateProject} />
+          <Route
+            path="/contributionDetail/:id"
+            component={ContributionDetail}
+          />
+          <Route path="/contributions" component={Contributions} />
+          <Route path="/signUp" component={SignUp} />
+          <Route path="/createStudents" component={CreateStudents} />
+          <Route path="/createAccount" component={CreateAccount} />
+          <Route path="/createCordinators" component={CreateCordinators} />
+          <Route path="/students" component={Students} />
+          <Route path="/reports" component={Reports} />
+        </Switch>
       </BrowserRouter>
     );
   }

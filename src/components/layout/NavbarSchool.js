@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom';
 import SignedInLink from './SignedInLink';
 import SignedOutLink from './SignedOutLink';
 import { connect } from 'react-redux';
-class Navbar extends Component {
+import { Navbar } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+class NavbarSchool extends Component {
   render() {
     const { auth } = this.props;
     return (
-      <nav className="nav-wrapper grey darken-3">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <div className="container">
-          <Link to="/home" className="brand-logo left">
-            Greenwich University
-          </Link>
+          <Navbar.Brand>
+            <NavLink to="/home">Greenwich University</NavLink>
+          </Navbar.Brand>
           {auth.uid ? <SignedInLink /> : <SignedOutLink />}
         </div>
-      </nav>
+      </Navbar>
     );
   }
 }
@@ -25,4 +27,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps)(NavbarSchool);
