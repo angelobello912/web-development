@@ -10,7 +10,6 @@ export default class Spinner extends Component {
     return (
       <div
         style={{
-          position: 'fixed',
           top: '50%',
           left: '50%'
         }}
