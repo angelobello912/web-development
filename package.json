@@ -8,7 +8,7 @@
     "chart.js": "^2.8.0",
     "file-saver": "^2.0.1",
     "firebase": "^5.9.0",
-    "jszip": "^3.2.1",
+    "jszip": "^3.7.0",
     "jszip-utils": "^0.0.2",
     "lodash": "^4.17.11",
     "mdbreact": "^4.12.0",
